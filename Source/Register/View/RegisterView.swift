@@ -34,6 +34,12 @@ struct RegisterView: View {
         }
         .padding(.horizontal)
         .navigationBarBackButtonHidden(true)
+        .navigationBarTitle("Register", displayMode: .inline)
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarBackground(
+            Color.orange,
+            for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
     }
 }
 extension RegisterView {

@@ -18,7 +18,7 @@ struct PokeDexView: View {
                     .disableAutocorrection(true)
                     .padding(16)
                     .padding(.horizontal, 45)
-                    .background(Color.orange.opacity(0.5))
+                    .background(Color.orange.opacity(0.3))
                     .cornerRadius(40)
                     .overlay(
                         HStack {
