@@ -9,12 +9,33 @@ import SwiftUI
 
 struct PokeDexView: View {
     @StateObject var viewModel = PokeDexViewModel()
+    @State private var searchText = ""
     
     var body: some View {
         NavigationView {
             VStack {
+                TextField("Search a pokemon", text: $searchText)
+                    .disableAutocorrection(true)
+                    .padding(16)
+                    .padding(.horizontal, 45)
+                    .background(Color.orange.opacity(0.5))
+                    .cornerRadius(40)
+                    .overlay(
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(Color(.systemGray))
+                                .frame(minWidth: 0,
+                                       maxWidth: .infinity,
+                                       alignment: .leading)
+                                .padding(.horizontal, 20)
+                            
+                        }
+                    )
+                
                 ScrollView(showsIndicators: false) {
-                    ForEach(viewModel.pokemons, id: \.id) { pokemon in
+                    ForEach(viewModel.pokemons.filter {
+                        searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased())
+                    }, id: \.id) { pokemon in
                         listItem(pokemon)
                     }
                 }
@@ -35,7 +56,7 @@ extension PokeDexView {
         } label: {
             VStack {
                 HStack {
-                    Text(pokemon.name?.capitalized ?? "Unknown")
+                    Text(pokemon.name.capitalized)
                         .foregroundStyle(.gray)
                     Spacer()
                     Image(systemName: "chevron.right")
@@ -46,7 +67,7 @@ extension PokeDexView {
                 Divider()
             }
         }
-
+        
     }
 }
 

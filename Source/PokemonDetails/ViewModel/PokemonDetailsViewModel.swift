@@ -17,8 +17,7 @@ class PokemonDetailsViewModel: ObservableObject {
 }
 extension PokemonDetailsViewModel {
     func getPokemon() {
-        guard let urlString = pokemonIndex.url,
-              let url = URL(string: urlString) else { return }
+        guard let url = URL(string: pokemonIndex.url) else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let data, let pokemon = try? JSONDecoder().decode(PokemonDetails.self, from: data) {

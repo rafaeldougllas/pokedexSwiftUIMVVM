@@ -12,7 +12,7 @@ struct PokemonList: Decodable {
     let results: [PokemonIndex]?
 }
 struct PokemonIndex: Decodable, Identifiable {
-    let name, url: String?
+    let name, url: String
     var id: UUID {
         UUID()
     }
